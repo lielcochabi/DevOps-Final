@@ -110,7 +110,7 @@
     </p>
 
     <form action="welcome.jsp" method="post">
-        <label for="username">Enter your name:</label>
+        <label for="username">Please enter your name:</label>
         <input type="text" id="username" name="username" placeholder="e.g. Liel" required>
         <button type="submit">Submit</button>
     </form>
