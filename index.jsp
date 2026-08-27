@@ -92,7 +92,6 @@
 
 <div class="header">
     <h1>DevOps Final Project</h1>
-    <p>Student 1 deliverable &mdash; Web Server &amp; Git</p>
 </div>
 <div class="accent-bar"></div>
 
