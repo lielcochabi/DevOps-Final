@@ -67,7 +67,7 @@
 <div class="content">
     <h2>Hello, <%= username %>!</h2>
     <p>Your submission was received successfully by the Tomcat server.</p>
-    <a class="back-link" href="index.jsp">&larr; Back to home</a>
+    <a class="back-link" href="index.jsp">Back to home</a>
 </div>
 
 </body>
