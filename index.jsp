@@ -103,7 +103,7 @@
     </p>
 
     <p>
-        <a class="ext-link" href="https://github.com/" target="_blank">
+        <a class="ext-link" href="https://github.com/lielcochabi/DevOps-Final" target="_blank">
             Visit our GitHub repository &rarr;
         </a>
     </p>
