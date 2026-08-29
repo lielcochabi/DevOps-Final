@@ -110,7 +110,9 @@
 
     <form action="welcome.jsp" method="post">
         <label for="username">Please enter your name:</label>
-        <input type="text" id="username" name="username" placeholder="e.g. Liel" required>
+        <input type="text" id="username" name="username" placeholder="e.g. Liel" required 
+               pattern=".*[A-Za-z].*" title="Please enter a valid name using English letters" 
+               oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '').replace(/^\s+/g, '')">
         <button type="submit">Submit</button>
     </form>
 
