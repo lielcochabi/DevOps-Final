@@ -94,7 +94,7 @@ def test_valid_submission(page: Page):
     page.get_by_role("button", name="Submit").click()
     
     logger.info("Searching the new page for the greeting text")
-    expect(page.get_by_text(f"Hello {input_name}")).to_be_visible()
+    expect(page.get_by_text(f"Hello, {input_name}!")).to_be_visible()
 
     logger.info("Locating and clicking the 'Back' link")
     page.get_by_role("link", name="← Back to home").click()
