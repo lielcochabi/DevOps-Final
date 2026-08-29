@@ -104,7 +104,7 @@
 
     <p>
         <a class="ext-link" href="https://github.com/lielcochabi/DevOps-Final" target="_blank">
-            Visit our GitHub repository &rarr;
+            Visit our GitHub repository
         </a>
     </p>
 
