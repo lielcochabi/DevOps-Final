@@ -64,7 +64,8 @@ def test_unsupported_chars(page: Page):
     page.goto(BASE_URL)
     
     logger.info("Filling text box with unsupported characters")
-    name_input = page.get_by_role("textbox", name="Please enter your name:").fill("!סתיו")
+    name_input = page.get_by_role("textbox", name="Please enter your name:")
+    name_input.fill("!סתיו")
 
     logger.info("Verifying the text box is empty")
     expect(name_input).to_be_empty()
