@@ -19,7 +19,7 @@ def test_visit_repo_link(page: Page):
     page.goto(BASE_URL)
     
     logger.info("Locating the GitHub Repo link")
-    repo_link = page.get_by_role("link", name="Visit our GitHub repository →")
+    repo_link = page.get_by_role("link", name="Visit our GitHub repository")
     
     logger.info("Verifying link attribute")
     expect(repo_link).to_have_attribute("href", "https://github.com/lielcochabi/DevOps-Final")
@@ -59,26 +59,21 @@ def test_empty_submission(page: Page):
   
 
 def test_unsupported_chars(page: Page):
-    """ Checking an unsupported chars submission flow, expecting no navigation + an error message"""
+    """ Checking an unsupported chars submission flow, expecting no input to be written"""
     logger.info(f"Navigating to {BASE_URL}")
     page.goto(BASE_URL)
     
     logger.info("Filling text box with unsupported characters")
-    name_input = page.get_by_role("textbox", name="Please enter your name:").fill("סתיו")
+    name_input = page.get_by_role("textbox", name="Please enter your name:").fill("!סתיו")
+
+    logger.info("Verifying the text box is empty")
+    expect(name_input).to_be_empty()
     
     logger.info("Clicking Submit")
     page.get_by_role("button", name="Submit").click()
     
     logger.info("Verifying no navigation occurred")
     expect(page).to_have_url(BASE_URL)
-    
-    logger.info("Verifying error message is visible")
-    # Adjust "unsupported" to match your actual error text
-    error_msg = page.get_by_text("unsupported") 
-    expect(error_msg).to_be_visible()
-    
-    logger.info("Verifying the Submit button is now disabled")
-    expect(page.get_by_role("button", name="Submit")).to_be_disabled()
 
 
 def test_valid_submission(page: Page):
@@ -97,7 +92,7 @@ def test_valid_submission(page: Page):
     expect(page.get_by_text(f"Hello, {input_name}!")).to_be_visible()
 
     logger.info("Locating and clicking the 'Back' link")
-    page.get_by_role("link", name="← Back to home").click()
+    page.get_by_role("link", name="Back to home").click()
     
     logger.info("Verifying redirection back to page")
     expect(page).to_have_url(re.compile("index.jsp"))
