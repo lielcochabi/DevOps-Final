@@ -1,28 +1,33 @@
 pipeline {
     agent any
 
-    // Trigger to run every 5 minutes
     triggers {
-        cron('H/5 * * * *')
+        pollSCM('* * * * *')
     }
 
     stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/lielcochabi/DevOps-Final.git'
+            }
+        }
+
         stage('Deploy to Tomcat') {
-            // Only run this stage if NOT triggered by the 5-minute timer
             when {
                 not { triggeredBy 'TimerTrigger' }
             }
             steps {
                 echo 'Deploying application to Tomcat...'
-                // IMPORTANT: Replace this with your actual Windows deployment command!
-                // bat 'copy *.jsp "C:\\Path\\To\\Tomcat\\webapps\\DevOps_Liel_Almog_Almog_Stav_Meshi\\" /Y'
-                
-                sleep time: 10, unit: 'SECONDS'
+                bat '''
+                    ssh -i C:\\Users\\user\\.ssh\\oracle_vm_key -o StrictHostKeyChecking=no opc@84.13.82.200 "mkdir -p /opt/tomcat/webapps/DevOps_Liel_Almog_Almog_Stav_Meshi"
+                    scp -i C:\\Users\\user\\.ssh\\oracle_vm_key -o StrictHostKeyChecking=no index.jsp opc@84.13.82.200:/opt/tomcat/webapps/DevOps_Liel_Almog_Almog_Stav_Meshi/
+                    scp -i C:\\Users\\user\\.ssh\\oracle_vm_key -o StrictHostKeyChecking=no welcome.jsp opc@84.13.82.200:/opt/tomcat/webapps/DevOps_Liel_Almog_Almog_Stav_Meshi/
+                '''
             }
         }
-        
+
         stage('Availability Monitor API') {
-            // No 'when' condition means this stage ALWAYS runs (both on timer and manual/push)
             steps {
                 echo 'Checking UptimeRobot Monitor via API...'
                 bat '''
@@ -33,28 +38,18 @@ pipeline {
                 '''
             }
         }
-        
+
         stage('Automation UI Tests') {
-            // Only run this stage if NOT triggered by the 5-minute timer
             when {
                 not { triggeredBy 'TimerTrigger' }
             }
             steps {
                 echo 'Setting up Python and running UI validations on Windows...'
                 bat '''
-                    :: Create a clean virtual environment
                     python -m venv venv
-                    
-                    :: Activate the virtual environment
                     call venv\\Scripts\\activate.bat
-                    
-                    :: Install testing libraries
                     pip install pytest pytest-playwright
-                    
-                    :: Install the headless Chromium browser
                     playwright install chromium --with-deps
-                    
-                    :: Run the test script and generate a report
                     pytest automation.py -v --log-cli-level=INFO --junitxml=report.xml
                 '''
             }
