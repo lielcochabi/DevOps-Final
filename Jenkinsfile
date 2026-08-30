@@ -6,13 +6,6 @@ pipeline {
     }
 
     stages {
-
-        stage('Checkout') {
-            steps {
-                git branch: 'dev', url: 'https://github.com/lielcochabi/DevOps-Final.git'
-            }
-        }
-
         stage('Deploy to Tomcat') {
             when {
                 not { triggeredBy 'TimerTrigger' }
