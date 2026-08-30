@@ -32,9 +32,9 @@ pipeline {
                 echo 'Checking UptimeRobot Monitor via API...'
                 bat '''
                 curl -X POST -s ^
-                     -H "Content-Type: application/x-www-form-urlencoded" ^
-                     -d "api_key=ur3685461-b27e0236b1c8fc6a5144f1d8&format=json&monitors=803853314" ^
-                     https://api.uptimerobot.com/v2/getMonitors | findstr "\"status\":2"
+                    -H "Content-Type: application/x-www-form-urlencoded" ^
+                    -d "api_key=ur3685461-b27e0236b1c8fc6a5144f1d8&format=json&monitors=803853314" ^
+                    https://api.uptimerobot.com/v2/getMonitors
                 '''
             }
         }
