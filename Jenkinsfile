@@ -55,7 +55,7 @@ pipeline {
                     playwright install chromium --with-deps
                     
                     :: Run the test script and generate a report
-                    pytest test_ui.py -v --log-cli-level=INFO --junitxml=report.xml
+                    pytest automation.py -v --log-cli-level=INFO --junitxml=report.xml
                 '''
             }
             post {
