@@ -4,7 +4,6 @@ pipeline {
     triggers {
         pollSCM('* * * * *')
     }
-
     stages {
         stage('Deploy to Tomcat') {
             when {
