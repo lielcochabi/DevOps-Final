@@ -58,13 +58,9 @@ pipeline {
         }
 
         stage('Gatling Load Test') {
-            when {
-                not { triggeredBy 'TimerTrigger' }
-            }
             steps {
                 echo 'Running Gatling Load Test (3 minutes) locally...'
-                // Running from specific local path
-                bat 'C:\\Devops\\gatling-charts-highcharts-bundle-3.10.4-bundle\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s LoadTestSimulation'
+                bat '''C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s LoadTestSimulation'''
             }
         }
 
@@ -75,7 +71,7 @@ pipeline {
             steps {
                 echo 'Running Gatling Stress Test locally...'
                 // Running from specific local path
-                bat 'C:\\Devops\\gatling-charts-highcharts-bundle-3.10.4-bundle\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s StressTestSimulation'
+                bat '''C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s StressTestSimulation'''
             }
         }
     }
