@@ -35,30 +35,37 @@ public class StressTestSimulation extends Simulation {
   {
     setUp(
       scn.injectOpen(
-        // 1. Gradual warm-up to the known max limit
-        rampUsersPerSec(10).to(70).during(Duration.ofSeconds(45)),
+        // 1. Gradual warm-up to 90% of the known max limit
+        rampUsersPerSec(10).to(70).during(Duration.ofSeconds(30)),
         
-        // 2. Saturation: keeping the server at its max capacity
-        constantUsersPerSec(70).during(Duration.ofMinutes(1)),
+        // 2. Saturation: keeping the server at 90% of its max capacity
+        constantUsersPerSec(70).during(Duration.ofSeconds(30)),
         
-        // 3. Aggressive Stress: Pushing way beyond Tomcat's default 200 threads
-        rampUsersPerSec(70).to(90).during(Duration.ofMinutes(1)),
+        // 3. Aggressive Stress: Pushing beyond Tomcat's default 200 threads
+        rampUsersPerSec(70).to(90).during(Duration.ofSeconds(20)),
+
+		constantUsersPerSec(90).during(Duration.ofSeconds(20)),
 		
-		rampUsersPerSec(90).to(105).during(Duration.ofMinutes(1)),
+		rampUsersPerSec(90).to(105).during(Duration.ofSeconds(20)),
         
         // 4. Extended Extreme Load: Holding for 20 seconds to force resource exhaustion and memory leaks
         constantUsersPerSec(105).during(Duration.ofSeconds(20)),
+
+		rampUsersPerSec(105).to(90).during(Duration.ofSeconds(20)),
+
+		constantUsersPerSec(90).during(Duration.ofSeconds(20)),
+		
+		rampUsersPerSec(90).to(105).during(Duration.ofSeconds(20)),
         
-        // 5. Recovery: sharp drop back to a low load
+        constantUsersPerSec(105).during(Duration.ofSeconds(20)),  
 		
-        rampUsersPerSec(105).to(90).during(Duration.ofSeconds(30)),
-		
-        rampUsersPerSec(90).to(70).during(Duration.ofSeconds(30)),
-		
-        rampUsersPerSec(70).to(20).during(Duration.ofSeconds(30)),
-        
+        rampUsersPerSec(105).to(90).during(Duration.ofSeconds(20)),
+		  
+		// 5. Recovery
+        rampUsersPerSec(90).to(40).during(Duration.ofSeconds(30)),
+		        
         // 6. Stability check post-crash
-        constantUsersPerSec(20).during(Duration.ofMinutes(1))
+        constantUsersPerSec(40).during(Duration.ofSeconds(30))
       )
     ).protocols(httpProtocol);
   }
