@@ -38,8 +38,8 @@ public class LoadTestSimulation extends Simulation {
         // 1. Ramp-up: Gradual increase from 10 to 70 users per second over 45 seconds
         rampUsersPerSec(10).to(70).during(Duration.ofSeconds(45)),
         
-        // 2. Steady State: Hold the maximum stable load (70 users/sec) for 90 seconds
-        constantUsersPerSec(70).during(Duration.ofSeconds(90)),
+        // 2. Steady State: Hold the maximum stable load (70 users/sec) for 180 seconds
+        constantUsersPerSec(70).during(Duration.ofSeconds(180)),
         
         // 3. Ramp-down: Gradual decrease from 70 down to 10 users per second over 45 seconds
         rampUsersPerSec(70).to(10).during(Duration.ofSeconds(45))
