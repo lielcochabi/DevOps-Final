@@ -62,7 +62,7 @@ pipeline {
                 echo 'Running Gatling Load Test (3 minutes) from git workspace...'
                 bat '''
                     set GATLING_HOME=C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4
-                    C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s LoadTestSimulation -sf "%WORKSPACE%"
+                    C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s LoadTestSimulation -sf "%WORKSPACE%" -rm local
                 '''
             }
         }
@@ -75,7 +75,7 @@ pipeline {
                 echo 'Running Gatling Stress Test from git workspace...'
                 bat '''
                     set GATLING_HOME=C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4
-                    C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s StressTestSimulation -sf "%WORKSPACE%"
+                    C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s StressTestSimulation -sf "%WORKSPACE%" -rm local
                 '''
             }
         }
