@@ -60,7 +60,10 @@ pipeline {
         stage('Gatling Load Test') {
             steps {
                 echo 'Running Gatling Load Test (3 minutes) from git workspace...'
-                bat '''C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s LoadTestSimulation -sf "%WORKSPACE%"'''
+                bat '''
+                    set GATLING_HOME=C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4
+                    C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s LoadTestSimulation -sf "%WORKSPACE%"
+                '''
             }
         }
 
@@ -70,7 +73,10 @@ pipeline {
             }
             steps {
                 echo 'Running Gatling Stress Test from git workspace...'
-                bat '''C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s StressTestSimulation -sf "%WORKSPACE%"'''
+                bat '''
+                    set GATLING_HOME=C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4
+                    C:\\DevOps\\gatling-charts-highcharts-bundle-3.10.4\\bin\\gatling.bat -s StressTestSimulation -sf "%WORKSPACE%"
+                '''
             }
         }
     }
