@@ -43,27 +43,20 @@ public class StressTestSimulation extends Simulation {
         
         // 3. Aggressive Stress: Pushing beyond Tomcat's default 200 threads
         rampUsersPerSec(70).to(90).during(Duration.ofSeconds(20)),
-
-		constantUsersPerSec(90).during(Duration.ofSeconds(20)),
-		
-		rampUsersPerSec(90).to(105).during(Duration.ofSeconds(20)),
+        constantUsersPerSec(90).during(Duration.ofSeconds(20)),
+        rampUsersPerSec(90).to(105).during(Duration.ofSeconds(20)),
         
         // 4. Extended Extreme Load: Holding for 20 seconds to force resource exhaustion and memory leaks
         constantUsersPerSec(105).during(Duration.ofSeconds(20)),
-
-		rampUsersPerSec(105).to(90).during(Duration.ofSeconds(20)),
-
-		constantUsersPerSec(90).during(Duration.ofSeconds(20)),
-		
-		rampUsersPerSec(90).to(105).during(Duration.ofSeconds(20)),
-        
-        constantUsersPerSec(105).during(Duration.ofSeconds(20)),  
-		
         rampUsersPerSec(105).to(90).during(Duration.ofSeconds(20)),
-		  
-		// 5. Recovery
+        constantUsersPerSec(90).during(Duration.ofSeconds(20)),
+        rampUsersPerSec(90).to(105).during(Duration.ofSeconds(20)),
+        constantUsersPerSec(105).during(Duration.ofSeconds(20)),  
+        rampUsersPerSec(105).to(90).during(Duration.ofSeconds(20)),
+          
+        // 5. Recovery
         rampUsersPerSec(90).to(40).during(Duration.ofSeconds(30)),
-		        
+                
         // 6. Stability check post-crash
         constantUsersPerSec(40).during(Duration.ofSeconds(30))
       )
