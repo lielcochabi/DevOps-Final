@@ -22,7 +22,7 @@ def test_visit_repo_link(page: Page):
     repo_link = page.get_by_role("link", name="Visit our GitHub repository")
     
     logger.info("Verifying link attribute")
-    expect(repo_link).to_have_attribute("href", "https://github.com/lielcochabi/DevOps-Final")
+    expect.soft(repo_link).to_have_attribute("href", "https://github.com/lielcochabi/DevOps-Final")
     
     logger.info("Clicking the link and waiting for the new tab to open")
     with page.expect_popup() as new_repo_tab:
@@ -90,7 +90,7 @@ def test_valid_submission(page: Page):
     page.get_by_role("button", name="Submit").click()
     
     logger.info("Searching the new page for the greeting text")
-    expect(page.get_by_text(f"Hello, {input_name}!")).to_be_visible()
+    expect.soft(page.get_by_text(f"Hello, {input_name}!")).to_be_visible()
 
     logger.info("Locating and clicking the 'Back' link")
     page.get_by_role("link", name="Back to home").click()
