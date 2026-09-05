@@ -24,7 +24,7 @@
         .header p {
             margin: 0;
             font-size: 13px;
-            color: #b9c2cf;
+            color: #3b82f6;
         }
         .accent-bar {
             height: 5px;
