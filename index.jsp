@@ -98,8 +98,8 @@
 <div class="content">
     <h2>Welcome</h2>
     <p>
-        This is the base web application for the team's DevOps final project.
-        It is deployed via Tomcat and version-controlled with Git / GitHub.
+        Live demo update — this text was pushed to GitHub seconds ago and
+        deployed automatically by Jenkins. Watch the pipeline do its thing!
     </p>
 
     <p>
