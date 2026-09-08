@@ -84,7 +84,7 @@
         .footer-note {
             margin-top: 20px;
             font-size: 12px;
-            color: #64748b;
+            color: #65748b;
         }
     </style>
 </head>
